@@ -2,10 +2,15 @@ package com.mott.eric.fbuinstagram;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
 
         ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -45,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
             btLogin = findViewById(R.id.btnLogin);
             btSignUp = findViewById(R.id.btnSignUp);
 
+            //Makes "Sign up." on the sign up button bold
+            String logInBtnString = "Don't have an account? Sign up.";
+            SpannableString spanString = new SpannableString(logInBtnString);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 23, 31, 0);
+            btSignUp.setText(spanString);
+
+            //Adds a text listener to the edit text boxes to make sure the user has inputted text
             etUsername.addTextChangedListener(textWatcher);
             etPassword.addTextChangedListener(textWatcher);
 

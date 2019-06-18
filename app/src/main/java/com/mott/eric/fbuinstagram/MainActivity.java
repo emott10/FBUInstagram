@@ -6,20 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.mott.eric.fbuinstagram.fragments.ComposeFragment;
 import com.mott.eric.fbuinstagram.fragments.ProfileFragment;
 import com.mott.eric.fbuinstagram.fragments.TimelineFragment;
-import com.mott.eric.fbuinstagram.model.Post;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -28,9 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().hide();
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
-
-
 
         //reference to bottom nav
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
