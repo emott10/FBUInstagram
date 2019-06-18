@@ -6,6 +6,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.Date;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
@@ -16,7 +18,6 @@ public class Post extends ParseObject {
     public String getDescription(){
         return getString(KEY_DESCRIPTION);
     }
-
 
     public void setDescription(String desc){
         put(KEY_DESCRIPTION, desc);
@@ -38,6 +39,7 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
+    public Date getCreatedAt(){ return getDate(KEY_CREATED_AT); }
 
 
     public static class Query extends ParseQuery<Post> {

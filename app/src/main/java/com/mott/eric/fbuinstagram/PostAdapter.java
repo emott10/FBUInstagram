@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.mott.eric.fbuinstagram.model.Post;
 import com.parse.ParseFile;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -40,7 +41,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Post post = mPosts.get(i);
         ParseFile image = post.getImage();
 
+        //format date to string
+       
+
+
         viewHolder.tvHandle.setText(post.getUser().getUsername());
+        viewHolder.tvDescHandle.setText(post.getUser().getUsername());
+        viewHolder.tvDate.setText(post.getCreatedAt().toString());
         viewHolder.tvDesc.setText(post.getDescription());
         Glide.with(context)
                 .load(image.getUrl())
@@ -57,13 +64,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView tvHandle;
         public ImageView ivPic;
         public TextView tvDesc;
+        public TextView tvDescHandle;
+        public TextView tvDate;
 
         public ViewHolder(View view){
             super(view);
 
-            tvHandle = view.findViewById(R.id.tvHandle);
-            ivPic = view.findViewById(R.id.ivPic);
+            tvHandle = view.findViewById(R.id.tvDetailHandle);
+            ivPic = view.findViewById(R.id.ivDetailPic);
             tvDesc = view.findViewById(R.id.tvDesc);
+            tvDescHandle = view.findViewById(R.id.tvDescHandle);
+            tvDate = view.findViewById(R.id.tvCreated);
 
 
         }
