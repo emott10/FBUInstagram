@@ -34,9 +34,11 @@ import static android.app.Activity.RESULT_OK;
 public class ProfilePicFragment extends Fragment {
     private ImageView ivPic;
     private Button btnSubmit;
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
+    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    private String photoFileName = "photo.jpg";
     private  File photoFile;
+    public ImageView ivIcon;
+    public ImageView ivTitle;
 
     @Nullable
     @Override
@@ -52,6 +54,11 @@ public class ProfilePicFragment extends Fragment {
         ivPic = view.findViewById(R.id.ivProfileImage);
         btnSubmit = view.findViewById(R.id.btnSubmitProfileImage);
         ivPic.setTag(R.drawable.default_image);
+        ivIcon = getActivity().findViewById(R.id.ivIcon);
+        ivTitle = getActivity().findViewById(R.id.ivTitle);
+
+        ivIcon.setVisibility(View.VISIBLE);
+        ivTitle.setVisibility(View.VISIBLE);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

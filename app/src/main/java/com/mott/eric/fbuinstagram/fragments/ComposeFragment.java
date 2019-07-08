@@ -36,9 +36,11 @@ public class ComposeFragment extends Fragment {
     private ImageView ivPic;
     private Button btnTakeImage;
     private Button btnSubmit;
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
+    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    private String photoFileName = "photo.jpg";
     private  File photoFile;
+    public ImageView ivIcon;
+    public ImageView ivTitle;
 
     @Nullable
     @Override
@@ -54,6 +56,11 @@ public class ComposeFragment extends Fragment {
         ivPic = view.findViewById(R.id.ivImage);
         btnSubmit = view.findViewById(R.id.btnSumbit);
         btnTakeImage = view.findViewById(R.id.btnTakeImage);
+        ivIcon = getActivity().findViewById(R.id.ivIcon);
+        ivTitle = getActivity().findViewById(R.id.ivTitle);
+
+        ivIcon.setVisibility(View.VISIBLE);
+        ivTitle.setVisibility(View.VISIBLE);
 
         ivPic.setTag(R.drawable.default_image);
 

@@ -150,10 +150,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="Date"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDescHandle" />
     </android.support.constraint.ConstraintLayout>

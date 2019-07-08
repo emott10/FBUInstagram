@@ -50,6 +50,8 @@ public class ProfileFragment extends Fragment {
     private TextView tvUsername;
     private ImageView ivProfilePic;
     private TextView tvNoImages;
+    public ImageView ivIcon;
+    public ImageView ivTitle;
     ParseUser user;
     ParseFile profilePic;
     Post post;
@@ -75,6 +77,11 @@ public class ProfileFragment extends Fragment {
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         tvNoImages = view.findViewById(R.id.tvNoImages);
         btnProfilePicSwap = view.findViewById(R.id.btnSwapProfilePic);
+        ivIcon = getActivity().findViewById(R.id.ivIcon);
+        ivTitle = getActivity().findViewById(R.id.ivTitle);
+
+        ivIcon.setVisibility(View.VISIBLE);
+        ivTitle.setVisibility(View.VISIBLE);
 
         if(post == null){
             user = ParseUser.getCurrentUser();

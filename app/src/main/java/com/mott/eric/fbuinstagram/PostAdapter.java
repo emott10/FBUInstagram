@@ -101,6 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView tvDate;
         public ImageButton ibHeart;
         public ImageButton ibProfilePic;
+        public  String likes;
 
         public ViewHolder(View view){
             super(view);
@@ -120,10 +121,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if((int)ibHeart.getTag() == R.drawable.ufi_heart) {
                         ibHeart.setImageResource(R.drawable.ufi_heart_active);
                         ibHeart.setTag(R.drawable.ufi_heart_active);
+                        Post post = mPosts.get(getAdapterPosition());
+                        likes = post.getLikes();
+                        int addLike = Integer.valueOf(likes);
+                        addLike++;
+                        likes = String.valueOf(addLike);
+                        post.setLikes(likes);
+                        post.saveInBackground();
                     }
                     else{
                         ibHeart.setImageResource(R.drawable.ufi_heart);
                         ibHeart.setTag(R.drawable.ufi_heart);
+                        Post post = mPosts.get(getAdapterPosition());
+                        likes = post.getLikes();
+                        int addLike = Integer.valueOf(likes);
+                        addLike--;
+                        likes = String.valueOf(addLike);
+                        post.setLikes(likes);
+                        post.saveInBackground();
                     }
                 }
             });

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.mott.eric.fbuinstagram.PostAdapter;
 import com.mott.eric.fbuinstagram.R;
@@ -28,6 +29,8 @@ public class TimelineFragment extends Fragment {
     ArrayList<Post> posts;
     RecyclerView rvPosts;
     private SwipeRefreshLayout swipeContainer;
+    public ImageView ivIcon;
+    public ImageView ivTitle;
 
 
     @Nullable
@@ -41,7 +44,11 @@ public class TimelineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //find recyclerview for posts
         rvPosts = view.findViewById(R.id.rvTimelineProfile);
+        ivIcon = getActivity().findViewById(R.id.ivIcon);
+        ivTitle = getActivity().findViewById(R.id.ivTitle);
 
+        ivIcon.setVisibility(View.VISIBLE);
+        ivTitle.setVisibility(View.VISIBLE);
 
 
         //create data source
@@ -88,6 +95,7 @@ public class TimelineFragment extends Fragment {
                 if(e == null){
                     postAdapter.clear();
                     for(int i = 0; i < objects.size(); i++){
+                        int test = objects.size();
                         Log.d("MainActivity", "Post[" + i + "] = " + objects.get(i).getDescription()
                                 + "\nusername = " + objects.get(i).getUser().getUsername());
 
