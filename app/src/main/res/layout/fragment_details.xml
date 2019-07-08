@@ -9,7 +9,7 @@
         android:id="@+id/ivDetailMore"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHandle"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicDetails"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -34,13 +34,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
         android:fontFamily="@font/roboto"
         android:text="emott10"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ivPic"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePicDetails"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -146,6 +149,19 @@
         app:layout_constraintBottom_toTopOf="@+id/tvDescHandle"
         app:layout_constraintStart_toEndOf="@+id/btnHeart"
         app:layout_constraintTop_toBottomOf="@+id/ivPic" />
+
+    <ImageButton
+        android:id="@+id/ivProfilePicDetails"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        android:src="@drawable/defualt_profile_pic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

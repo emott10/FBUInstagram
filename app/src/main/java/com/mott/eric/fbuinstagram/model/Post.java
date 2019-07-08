@@ -6,8 +6,10 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.Serializable;
+
 @ParseClassName("Post")
-public class Post extends ParseObject {
+public class Post extends ParseObject implements Serializable {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
@@ -59,10 +61,10 @@ public class Post extends ParseObject {
             return this;
         }
 
-        public Query profileQuery(){
+        public Query profileQuery(ParseUser user){
             setLimit(20);
             addDescendingOrder(KEY_CREATED_AT);
-            whereEqualTo(KEY_USER, ParseUser.getCurrentUser());
+            whereEqualTo(KEY_USER, user);
             return this;
         }
     }

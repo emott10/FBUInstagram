@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
@@ -15,11 +16,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.mott.eric.fbuinstagram.fragments.DetailsFragment;
+import com.mott.eric.fbuinstagram.fragments.ProfileFragment;
 import com.mott.eric.fbuinstagram.model.Post;
 import com.parse.ParseFile;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     List<Post> mPosts;
@@ -27,6 +33,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     //pass in the posts array in the constructor
     public PostAdapter(List<Post> posts){
+
         mPosts = posts;
     }
 
@@ -38,6 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         View postView = inflater.inflate(R.layout.item_post, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(postView);
+
         return viewHolder;
     }
 
@@ -45,6 +53,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull PostAdapter.ViewHolder viewHolder, int i) {
         Post post = mPosts.get(i);
         ParseFile image = post.getImage();
+        ParseFile profilePic = post.getUser().getParseFile("profilePic");
+        if(profilePic != null) {
+            Log.d("Test2", "Pic: " + profilePic.getUrl());
+        }
 
         //format date string
         String date = post.getCreatedAt().toString();
@@ -58,6 +70,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Glide.with(context)
                 .load(image.getUrl())
                 .into(viewHolder.ivPic);
+
+        if(profilePic != null){
+            viewHolder.ibProfilePic.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Glide.with(context)
+                    .load(profilePic.getUrl())
+                    .apply(new RequestOptions().transforms(new CenterCrop(), new RoundedCornersTransformation(75, 0)))
+                    .into(viewHolder.ibProfilePic);
+        }
+        else {
+            viewHolder.ibProfilePic.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            Glide.with(context)
+                    .load(R.drawable.defualt_profile_pic)
+                    .apply(new RequestOptions().transforms(new CenterCrop(), new RoundedCornersTransformation(75, 0)))
+                    .into(viewHolder.ibProfilePic);
+        }
     }
 
     @Override
@@ -73,6 +100,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView tvDescHandle;
         public TextView tvDate;
         public ImageButton ibHeart;
+        public ImageButton ibProfilePic;
 
         public ViewHolder(View view){
             super(view);
@@ -83,6 +111,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvDescHandle = view.findViewById(R.id.tvDescHandle);
             tvDate = view.findViewById(R.id.tvCreated);
             ibHeart = view.findViewById(R.id.btnHeart);
+            ibProfilePic = view.findViewById(R.id.ibtnProfilePic);
 
             ibHeart.setTag(R.drawable.ufi_heart);
             ibHeart.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +128,60 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
             });
 
+            ibProfilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        Post post = mPosts.get(position);
+                        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("postId", post);
+                        Fragment fragment = new ProfileFragment();
+                        fragment.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
+
+                    }
+                }
+            });
+
+            tvHandle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        Post post = mPosts.get(position);
+                        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("postId", post);
+                        Fragment fragment = new ProfileFragment();
+                        fragment.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
+
+                    }
+                }
+            });
+
+            tvDescHandle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        Post post = mPosts.get(position);
+                        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("postId", post);
+                        Fragment fragment = new ProfileFragment();
+                        fragment.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
+
+                    }
+                }
+            });
+
             view.setOnClickListener(this);
         }
 
@@ -110,14 +193,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 Post post = mPosts.get(position);
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 Bundle bundle = new Bundle();
-                bundle.putString("postId", post.getObjectId());
+                bundle.putSerializable("postId", post);
                 Fragment fragment = new DetailsFragment();
                 fragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
-
-                /*Intent i = new Intent(context, DetailsActivity.class);
-                i.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
-                context.startActivity(i);*/
             }
         }
     }

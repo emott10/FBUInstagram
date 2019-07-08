@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</android.support.constraint.ConstraintLayout>
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="0dp"-->
+    <!--android:background="#FFF"-->
+    <!--android:alpha="0.1"-->
+    <!--android:gravity="center">-->
+
+    <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="48dp"-->
+        <!--android:layout_marginTop="96dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="48dp"-->
+        <!--android:layout_marginBottom="96dp"-->
+        <!--card_view:cardBackgroundColor="#FFFFFF"-->
+        <!--card_view:cardCornerRadius="8dp"-->
+        <!--card_view:cardElevation="4dp">-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="0dp"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="0dp"-->
+            <!--android:background="#fff"-->
+            <!--android:fadingEdge="horizontal|vertical">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnLogout"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:background="@color/lightBlue"-->
+                <!--android:text="Logout"-->
+                <!--android:textColor="#fff"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/glHori"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/btnSwapProfilePic"-->
+                <!--app:layout_constraintStart_toStartOf="@+id/btnSwapProfilePic" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnSwapProfilePic"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="16dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:background="@color/lightBlue"-->
+                <!--android:text="Change Profile picture"-->
+                <!--android:textColor="#fff"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="@+id/glHori" />-->
+
+
+            <!--<android.support.constraint.Guideline-->
+                <!--android:id="@+id/glHori"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginEnd="1dp"-->
+                <!--android:layout_marginRight="1dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--app:layout_constraintGuide_percent="0.5" />-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--</android.support.v7.widget.CardView>-->
+
+<!--</RelativeLayout>-->
+
+
+<!--<android.support.v7.widget.CardView-->
+<!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--android:layout_width="0dp"-->
+<!--android:layout_height="0dp"-->
+<!--app:layout_constraintBottom_toTopOf="@+id/glConstraint4"-->
+<!--app:layout_constraintEnd_toStartOf="@+id/glConstraint2"-->
+<!--app:layout_constraintStart_toStartOf="@+id/glConstraint1"-->
+<!--app:layout_constraintTop_toTopOf="@+id/glConstraint3"-->
+<!--card_view:cardBackgroundColor="#FFFFFF"-->
+<!--card_view:cardCornerRadius="8dp"-->
+<!--card_view:cardElevation="3dp">-->
+
+<!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnLogout"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:background="@color/lightBlue"-->
+        <!--android:text="Logout"-->
+        <!--android:textColor="#fff"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/glHori"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/btnSwapProfilePic"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/btnSwapProfilePic" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnSwapProfilePic"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:background="@color/lightBlue"-->
+        <!--android:text="Change Profile picture"-->
+        <!--android:textColor="#fff"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/glHori" />-->
+
+
+    <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/glHori"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="1dp"-->
+        <!--android:layout_marginRight="1dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.5" />-->
+
+<!--</android.support.constraint.ConstraintLayout>-->
+
+<!--</android.support.v7.widget.CardView>-->

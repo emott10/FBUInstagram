@@ -1,5 +1,7 @@
 package com.mott.eric.fbuinstagram.fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import com.mott.eric.fbuinstagram.PostAdapter;
 import com.mott.eric.fbuinstagram.R;
 import com.mott.eric.fbuinstagram.model.Post;
+import com.mott.eric.fbuinstagram.viewModel.SharedViewModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -39,6 +42,8 @@ public class TimelineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //find recyclerview for posts
         rvPosts = view.findViewById(R.id.rvTimelineProfile);
+
+
 
         //create data source
         posts = new ArrayList<>();

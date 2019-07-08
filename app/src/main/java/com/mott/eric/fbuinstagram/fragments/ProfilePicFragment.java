@@ -10,18 +10,18 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mott.eric.fbuinstagram.R;
-import com.mott.eric.fbuinstagram.model.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -31,10 +31,8 @@ import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ComposeFragment extends Fragment {
-    private EditText etDesc;
+public class ProfilePicFragment extends Fragment {
     private ImageView ivPic;
-    private Button btnTakeImage;
     private Button btnSubmit;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
@@ -43,63 +41,43 @@ public class ComposeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_compose, container, false);
+        launchCamera();
+        return inflater.inflate(R.layout.fragment_profile_pic, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        etDesc = view.findViewById(R.id.etDesc);
-        ivPic = view.findViewById(R.id.ivImage);
-        btnSubmit = view.findViewById(R.id.btnSumbit);
-        btnTakeImage = view.findViewById(R.id.btnTakeImage);
-
+        ivPic = view.findViewById(R.id.ivProfileImage);
+        btnSubmit = view.findViewById(R.id.btnSubmitProfileImage);
         ivPic.setTag(R.drawable.default_image);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String description = etDesc.getText().toString();
                 ParseUser user = ParseUser.getCurrentUser();
-                if(photoFile == null || ivPic.getDrawable() == null){
-                    Toast.makeText(getContext(), "Please take a photo before submitting", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    savePost(description, user, photoFile);
-                }
-            }
-        });
+                user.put("profilePic", new ParseFile(photoFile));
+                user.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException ex) {
+                        if (ex == null) {
+                            Toast.makeText(getContext(), "Successfully changed profile picture", Toast.LENGTH_SHORT).show();
+                            FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+                            Fragment fragment = new ProfileFragment();
+                            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
+                        }
 
-        btnTakeImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCamera();
+                        else {
+                            // Failed
+                            Toast.makeText(getContext(), "Something went wrong, please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
 
-    private void savePost(String description, ParseUser user, File photoFile) {
-        Post post = new Post();
-        post.setDescription(description);
-        post.setUser(user);
-        post.setImage(new ParseFile(photoFile));
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.d("ComposeFragment", "Post failed");
-                    e.printStackTrace();
-                    return;
-                }
-                else{
-                    Log.d("ComposeFragment", "Post successful");
-                    etDesc.setText("");
-                    ivPic.setImageResource(0);
-                }
-            }
-        });
-    }
 
     public void launchCamera() {
         // create Intent to take a picture and return control to the calling application
@@ -142,6 +120,7 @@ public class ComposeFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                btnSubmit.setVisibility(View.VISIBLE);
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // RESIZE BITMAP, see section below
@@ -150,6 +129,9 @@ public class ComposeFragment extends Fragment {
                 ivPic.setTag(ivPic.getDrawable());
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+                Fragment fragment = new ProfileFragment();
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
             }
         }
     }
