@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.mott.eric.fbuinstagram.PostAdapter;
 import com.mott.eric.fbuinstagram.R;
 import com.mott.eric.fbuinstagram.model.Post;
-import com.mott.eric.fbuinstagram.viewModel.SharedViewModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
